@@ -41,18 +41,7 @@ def register():
         conn.close()
         return redirect(url_for('display_user', username=username))
     return render_template('register.html')
-#@app.route('/display/<username>')
-#def display_user(username):
-#    conn = connect_db()
-#    cur = conn.cursor()
-#    cur.execute("SELECT first_name, last_name, email FROM users WHERE username=?", (username,))
-#    user = cur.fetchone()
-#   conn.close()
-
-#    if user:
-#       return f"Name: {user[0]} {user[1]}, Email: {user[2]}"
-#    return "User not found!"
-@app.route('/display/<username>')
+@app.route('/profile/<username>')
 def display_user(username):
     conn = connect_db()
     cur = conn.cursor()
@@ -65,7 +54,7 @@ def display_user(username):
         return render_template('user_details.html', first_name=user[0], last_name=user[1], email=user[2])
     return "User not found!"
 
-@app.route('/display-info')
+@app.route('/profile-info')
 def login_user():
     username=request.args.get('username');
     password = request.args.get('password')
